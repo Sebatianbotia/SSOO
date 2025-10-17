@@ -118,6 +118,7 @@ int main(){
             close(pipes[i+1][1]); // Cerrar después de escribir
         }
     }
+    
     free(pipes);
     return 0;
 
