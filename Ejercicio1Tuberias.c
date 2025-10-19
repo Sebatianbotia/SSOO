@@ -77,7 +77,7 @@ int main(){
         }
         sleep(1);
 
-        #define msg(X, Y) printf("hijo: %d -> cerrando tuberia: %d\n", X, Y);
+        //#define msg(X, Y) printf("hijo: %d -> cerrando tuberia: %d\n", X, Y);
         for (int j = 0; j < nHijos; j++){// aca cerramos las tuberias que no usará cada hijo,
                                          // cada uno lee del tubo i y escribe en el i+1, excepto el 3, pero tambien se cumple
             if(j==i) {
@@ -118,7 +118,7 @@ int main(){
             close(pipes[i+1][1]); // Cerrar después de escribir
         }
     }
-    
+
     free(pipes);
     return 0;
 
