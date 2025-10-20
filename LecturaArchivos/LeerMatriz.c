@@ -31,5 +31,6 @@ int main(){
         printf("\n");
     }
     
+    close(archivo);
     return 0;
 }
