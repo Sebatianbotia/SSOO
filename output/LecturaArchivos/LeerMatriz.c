@@ -24,11 +24,18 @@ int main(){
     }
     for(int i = 0; i < filas;i++ ){
         for(int j=0 ; j< columnas; j++){
+            //fscanf(archivo, "1%d", &matriz[i][j]); De esta manera se lee un
             fscanf(archivo, "%d", &matriz[i][j]);//leemos matriz fila por fila;
             printf("[%d]", matriz[i][j]);//imprimimos matriz
         }
         printf("\n");
     }
-    
+
+    for (int i =0; i<filas; i++){
+        free(matriz[i]);
+
+    }
+    free(matriz);
+    fclose(archivo);
     return 0;
 }
