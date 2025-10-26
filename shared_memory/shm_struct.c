@@ -5,15 +5,20 @@
 #include<sys/shm.h>
 #include<sys/ipc.h>
 
+typedef struct s {
+    int a;
+    float b;
+} structutre;
+
 int main(){
 
     int filas = 3;
     int columnas = 3;
 
-    int id = shmget(IPC_PRIVATE, filas*columnas*sizeof(int)+filas*sizeof(int*), 0666 | IPC_CREAT);
+    int id = shmget(IPC_PRIVATE, filas*columnas*sizeof(structutre)+ filas*sizeof(structutre*), 0666 | IPC_CREAT);
     void *base = shmat(id, NULL, 0);
-    int **m = (int**)base;
-    int *datos = (int*)((char*)base+filas*sizeof(int*));
+    structutre **m = (structutre**)base;
+    structutre *datos = (structutre*)((char*)base+filas*sizeof(structutre*));
     for(int i = 0; i<filas; i++){
         m[i]= &datos[i*columnas];
     }
@@ -21,18 +26,21 @@ int main(){
 
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++){
-            m[i][j] = i;
+            structutre st = {
+                .a = 10+i,
+                .b = 2.12+j
+            };
+            m[i][j] = st;
         }
     }
 
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++){
-            printf("%d ", m[i][j]);
+            printf("%d %f ", m[i][j].a, m[i][j].b);
         }
         printf("\n");
     }
 
-    printf("size: %lu\n", filas*columnas*sizeof(int)+filas*sizeof(int*));
 
     return 0;
 }
