@@ -5,6 +5,14 @@
 #include <sys/wait.h>
 #include <string.h>
 
+
+typedef struct User {
+    char* nombre;
+    char* apellido;
+    int edad;
+} User;
+
+
 void print_debug_tree(){
   char cmd[50];
    sprintf(cmd, "pstree -lp %d", getpid());
@@ -37,8 +45,6 @@ int main(){
         char msg[100];
        
 
-        printf("ingrese en mensaje: ");
-        scanf("%s", msg);
 
         close(pipes[0][0]);
         close(pipes[nPipes-1][1]);
