@@ -7,5 +7,6 @@
         "string.h": "c",
         "signal.h": "c",
         "fcntl.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
